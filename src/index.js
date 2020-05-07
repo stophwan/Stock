@@ -2,12 +2,30 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, compose } from 'redux';
+import {createMuiTheme, makeStyles, ThemeProvider} from '@material-ui/core/styles';
+import thunk from 'redux-thunk';
+import logger from 'redux-logger';
+import rootReducer from './reducers/index'
 import * as serviceWorker from './serviceWorker';
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(rootReducer, composeEnhancers( applyMiddleware(logger, thunk)));
+const theme = createMuiTheme({
+  palette: {
+    type: 'light',
+  },
+});
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <Provider store = {store}>
+    <React.StrictMode>
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
+  </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 
