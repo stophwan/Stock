@@ -12,8 +12,9 @@ import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    flexGrow: 1,
     width: '100%',
-    maxWidth: '36ch',
+    maxWidth: '144ch',
     backgroundColor: theme.palette.background.paper,
   },
   inline: {
@@ -45,8 +46,8 @@ const CompanyProfile = ({company}) => {
             </React.Fragment>
           }
         />
-      </ListItem>
-      <Divider />
+        </ListItem>
+        <Divider />
       </div>
     )
 }
@@ -56,9 +57,11 @@ const CompanyList = () => {
     const classes = useStyles();
     const companies = useSelector(state => state.companies)
     return (
+        <>
         <List className = {classes.root}>
             {companies.map(company => <CompanyProfile key={company.phone} company = {company}/>)}
         </List>
+        </>
     )
 }
 
