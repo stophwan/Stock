@@ -1,54 +1,41 @@
 import React from 'react';
+import _ from "lodash"
 import { useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import StorefrontIcon from '@material-ui/icons/Storefront';
+import {Link} from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     width: '100%',
-    maxWidth: '144ch',
-    backgroundColor: theme.palette.background.paper,
   },
-  inline: {
-    display: 'inline',
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
   },
 }));
 
 const CompanyProfile = ({company}) => {
-    const classes = useStyles();
-    const {ticker, name, country, logo} = company;
+    const { description } = company;
     return(
-        <div>
-        <ListItem alignItems="flex-start">
-        <ListItemAvatar>
-          <Avatar alt={ticker} src={logo} />
-        </ListItemAvatar>
-        <ListItemText
-          primary= {name}
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes.inline}
-                color="textPrimary"
-              >
-                {country}
-              </Typography>
-            </React.Fragment>
-          }
-        />
-        </ListItem>
-        <Divider />
-      </div>
+      <ListItem
+      button = {true} 
+      component = {Link}
+      to={`/company/${company.symbol}`}
+      >
+      <ListItemIcon>
+          <StorefrontIcon />
+      </ListItemIcon>
+      <ListItemText primary={description}/>
+    </ListItem>
     )
 }
 
@@ -59,10 +46,11 @@ const CompanyList = () => {
     return (
         <>
         <List className = {classes.root}>
-            {companies.map(company => <CompanyProfile key={company.phone} company = {company}/>)}
+            {companies.map(company => (<CompanyProfile key={company.symbol} company = {company}/>))}
         </List>
         </>
     )
 }
 
 export default CompanyList;
+

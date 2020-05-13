@@ -1,5 +1,6 @@
 import * as React from 'react';
 import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography'
 import {
   Chart,
   ArgumentAxis,
@@ -46,9 +47,10 @@ export default class Demo extends React.PureComponent {
             valueField="price"
             argumentField="date"
           />
-          <Title
-            text="Average USD market price across major bitcoin exchanges"
-          />
+          <Typography
+          component="h2" variant="h6" color="primary" gutterBottom
+          >
+          Stock Today</Typography>
           <Animation />
         </Chart>
       </Paper>
