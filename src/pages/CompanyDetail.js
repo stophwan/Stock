@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Chart from '../components/Chart';
+import Icons from '../components/Icons'
 import NewChart from '../components/NewChart';
 import StockInfo from '../components/StockInfo';
 import CompanyInfo from '../components/CompanyInfo';
@@ -42,17 +42,37 @@ const CompanyDetail = () => {
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
     const {ticker} = useParams();
-    const dispatch = useDispatch();
+    const resolution =  useSelector(state => state.resolution);
     const companyinfo = useSelector(state => state.companyinfo);
     const stockcandle = useSelector(state => state.stockcandle);
+    const dispatch = useDispatch();
 
     useEffect(() => {
-      if(!companyinfo){
-       dispatch((createCompanyInfo(ticker)));
+
+      if(companyinfo){
+        if(ticker !== companyinfo.ticker){
+          dispatch((createCompanyInfo(ticker)));
+        }
+        else{
+          return;
+        } 
       }
-      if(!stockcandle){
-        dispatch((createStockChart(ticker)));
+      else{
+      dispatch((createCompanyInfo(ticker)));
       }
+
+      if(stockcandle){
+        if(ticker !== stockcandle.ticker){
+          dispatch((createStockChart(ticker,resolution)));
+        }
+        else{
+          return;
+        }
+      }
+      else{
+        dispatch((createStockChart(ticker,resolution)))
+      }
+
     });
 
 
@@ -69,7 +89,8 @@ const CompanyDetail = () => {
               </Grid>
               <Grid item xs={12} md={8} lg={9}>
                 <Paper className={fixedHeightPaper}>
-                  <NewChart candle= {stockcandle}/>
+                  <NewChart candle={stockcandle}/>
+                  <Icons/>
                 </Paper>
               </Grid>
               <Grid item xs={12} md={4} lg={3}>
