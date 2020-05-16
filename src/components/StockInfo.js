@@ -19,11 +19,15 @@ const useStyles = makeStyles({
 
 });
 
-function contarst_color(contrast_num, contrast_per){
+function contarst_color(c,contrast_num, contrast_per){
   if(contrast_num>0){
     return(
       <React.Fragment>
         <span style={{color: '#0000FF'}}>
+          <Typography variant = 'h4'>
+            {c}
+          </Typography>
+        <br/>
           <ExpandLessIcon/>
           <b>{contrast_num} </b> ({contrast_per}%)
         </span>
@@ -34,6 +38,10 @@ function contarst_color(contrast_num, contrast_per){
     return(
       <React.Fragment>
       <span style={{color: '#DC143C' }}>
+        <Typography variant = 'h4'>
+        {c}
+        </Typography>
+        <br/>
         <ExpandMoreIcon/>
         <b>{contrast_num} </b> ({contrast_per}%)
       </span>
@@ -70,12 +78,7 @@ export default function StockInfo() {
       <Table className={classes.table} aria-label="spanning table">
         <TableRow>
             <TableCell rowSpan={3} align="center">
-              <Typography variant="h4"  style={{color: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'}}>
-              Current : {stockinfo.c}
-              </Typography>
-              <br/>
-             전일대비: {contarst_color(stockinfo.contrast_num, stockinfo.contrast_per)}
-            
+             {contarst_color(stockinfo.c, stockinfo.contrast_num, stockinfo.contrast_per)}   
             </TableCell>
             <TableCell colSpan={2}>Open Price  :  {stockinfo.o}</TableCell>
             <TableCell >High Price  : {stockinfo.h}</TableCell>

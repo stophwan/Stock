@@ -149,10 +149,10 @@ export function minuteStock(company){
         const minuteStock_url = `${BASE_URL}/stock/candle`;
         try{
             const toDate = Math.floor(Date.now() / 1000)
-            const fromDate = toDate - 10*60
+            const fromDate = toDate - 10*60*60
             const stock = await axios(minuteStock_url, {params: {
                 symbol: company,
-                resolution: '1',
+                resolution: '60',
                 from : fromDate,
                 to: toDate,
                 token: API_KEY

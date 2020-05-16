@@ -45,7 +45,6 @@ export default function DayStock() {
         <TableHead>
           <TableRow>
             <TableCell>Date</TableCell>
-            <TableCell>전일대비</TableCell>
             <TableCell>Open</TableCell>
             <TableCell>Close</TableCell>
             <TableCell>High</TableCell>
@@ -57,7 +56,6 @@ export default function DayStock() {
           {daystock.map((stock) => (
             <TableRow key={stock.t}>
               <TableCell>{timetoDate(stock.t)}</TableCell>
-              <TableCell>{stock.pc}</TableCell>
               <TableCell>{stock.o}</TableCell>
               <TableCell>{stock.c}</TableCell>
               <TableCell>{stock.h}</TableCell>
