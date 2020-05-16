@@ -7,25 +7,30 @@ import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { useSelector, useDispatch } from "react-redux";
 import { chageResolution } from "../actions";
+import { useParams } from 'react-router-dom';
 
 export default function ToggleButtonSizes() {
-  const [alignment, setAlignment] = React.useState('d');
+  const [alignment, setAlignment] = React.useState('D');
 
+  const resolution =  useSelector(state => state.resolution);
   const dispatch = useDispatch();
+  const {ticker} = useParams();
 
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
+    dispatch((chageResolution(alignment)))
+
   };
 
   const children = [
     <ToggleButton key={1} value="D">
-      <FormatAlignLeftIcon />
+      D
     </ToggleButton>,
     <ToggleButton key={2} value="W">
-      <FormatAlignCenterIcon />
+      W
     </ToggleButton>,
     <ToggleButton key={3} value="M">
-      <FormatAlignRightIcon />
+      M
     </ToggleButton>,
   ];
 
@@ -34,11 +39,7 @@ export default function ToggleButtonSizes() {
     <Grid container spacing={2} direction="column" alignItems="center">
       <Grid item>
         <ToggleButtonGroup size="medium" value={alignment}
-         exclusive onChange={handleChange}
-         onClick = {()=>{
-           dispatch(chageResolution())
-         }
-        }>
+         exclusive onChange={handleChange}>
           {children}
         </ToggleButtonGroup>
       </Grid>

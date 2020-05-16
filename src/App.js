@@ -6,6 +6,7 @@ import{ BrowserRouter as Router,
 } from "react-router-dom";
 import CompanyDetail from './pages/CompanyDetail';
 import MainPage from './pages/MainPage'
+import News from './pages/News'
 import Container from '@material-ui/core/Container';
 import TopNav from './components/TopNav'
 
@@ -20,6 +21,9 @@ function App() {
           <Switch>
             <Route path="/company/:ticker">
               <CompanyDetail />
+            </Route>
+            <Route path="/news/:ticker">
+              <News />
             </Route>
             <Route path="/">
               <MainPage/>

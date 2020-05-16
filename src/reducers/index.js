@@ -6,6 +6,10 @@ const baseState = {
     companyinfo: null,
     stockinfo: null,
     stockcandle: null,
+    stockanalysts: null,
+    minutestock: null,
+    daystock: null,
+    newsinfo: null,
     resolution: 'D'
 }
 
@@ -23,17 +27,23 @@ const reducer = produce((state, action)=>{
         case "CREATE_STOCKINFO":
             state.stockinfo = action.payload;
             break
-        case "RESOLUTION_D":
-            state.resolution = 'D';
-            break;
-        case "RESOLUTION_W":
-            state.resolution = 'W';
-            break;
-        case "RESOLUTION_M":
-            state.resolution = 'M';
+        case "CHANGE_RESOLUTION":
+            state.resolution = action.resolution;
             break;
         case "CREATE_STOCKCHART":
             state.stockcandle = action.payload;
+            break;
+        case "CREATE_STOCKANALYSTS":
+            state.stockanalysts = action.payload
+            break;
+        case "MINUTESTOCK":
+            state.minutestock = action.payload
+            break;
+        case "DAYSTOCK":
+            state.daystock = action.payload
+            break;
+        case "CREATE_NEWSINFO":
+            state.newsinfo = action.payload
             break;
         default:
             break;

@@ -18,7 +18,7 @@ export default class ApexChart extends React.Component {
             height: 350
           },
           title: {
-            text: 'CandleStick Chart',
+            text: 'Candle Chart',
             align: 'left'
           },
           xaxis: {

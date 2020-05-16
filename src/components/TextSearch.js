@@ -8,7 +8,8 @@ const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
-      width: '25ch',
+      marginTop: '100px',
+      width: '100ch',
     },
   },
 }));
@@ -21,7 +22,8 @@ export default function BasicTextFields() {
 
   return (
     <form className={classes.root} noValidate autoComplete="off">
-      <TextField id="outlined-basic" label="Outlined" variant="outlined"
+      <TextField id="outlined-basic" label="Search Symbol" variant="outlined"
+        color = "secondary"
         value = {name}
         onChange={(event)=>{
             setName(event.target.value);

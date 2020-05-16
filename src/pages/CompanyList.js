@@ -53,7 +53,7 @@ const use2Styles = makeStyles((theme) => ({
 const CompanyProfile = ({company}) => {
     const classes = useStyles();
     const classes2 = use2Styles();
-    const { name,logo,c,v, ticker } = company;
+    const { name,logo,c, ticker } = company;
     return(
     //   <ListItem
     //   button = {true} 
@@ -86,7 +86,7 @@ const CompanyProfile = ({company}) => {
                 className={classes2.inline}
                 color="textPrimary"
               >
-                {c}
+                Now: {c}
               </Typography>
             </React.Fragment>
           }
@@ -103,7 +103,6 @@ const CompanyProfile = ({company}) => {
 const CompanyList = () => {
     const classes = useStyles();
     const maininfo = useSelector(state => state.maininfo)
-    console.log(maininfo)
     return (
         <div>
         <List className = {classes.root}>

@@ -9,7 +9,10 @@ import HomeIcon from '@material-ui/icons/Home';
 import SearchIcon from '@material-ui/icons/Search';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import { Link } from "react-router-dom";
-
+import {  useSelector, useDispatch } from "react-redux";
+import { createStockInfo } from "../actions";
+import { createMainInfo } from "../actions";
+import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -52,10 +55,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function PrimarySearchAppBar() {
   const classes = useStyles();
+  const {ticker} = useParams();
+  const dispatch = useDispatch();
+
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" style={{background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)'}}>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
             MJ_STOCK
@@ -64,35 +70,19 @@ export default function PrimarySearchAppBar() {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}
           >
-            <IconButton aria-label="Lists"
+            <IconButton aria-label="Home"
             onClick = {() => {}}
             component = {Link} 
             to = '/'
             color="inherit">
                 <HomeIcon />
             </IconButton>
-            {/* <IconButton aria-label="Lists"
-            onClick = {() => {}}
-            component = {Link} 
-            to = '/list'
-            color="inherit">
-                <ListIcon />
-            </IconButton> */}
-            {/* <IconButton aria-label = 'News' 
-            onClick = {() => {}
-            }
-            component = {Link} 
-            to = '/news'
-            color="inherit">
-                <NoteIcon />
-            </IconButton> */}
             <IconButton
               edge="end"
               aria-label="detail"
-              onClick = {() => {}}
-              component = {Link}
-              to = '/detail'
-              color="inherit"
+              onClick = {() => {
+                dispatch(createStockInfo(ticker))
+              }}
             >
               <RefreshIcon />
             </IconButton>

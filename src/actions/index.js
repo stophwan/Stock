@@ -79,6 +79,8 @@ export function createStockInfo(company){
                 token: API_KEY
             }})
             quote.data.ticker = company
+            quote.data.contrast_num = (quote.data.c-quote.data.pc).toFixed(2)
+            quote.data.contrast_per = ((quote.data.c-quote.data.pc)/quote.data.pc*100).toFixed(2)
             console.log(quote)
             dispatch({type: 'CREATE_STOCKINFO',payload: quote.data})
         }catch(error){
@@ -87,6 +89,7 @@ export function createStockInfo(company){
     }
 
 }
+
 
 export function createStockChart(company, resolution='D'){
     return async (dispatch) =>{
@@ -116,17 +119,120 @@ export function createStockChart(company, resolution='D'){
             }})
             stock.data.ticker = company
             
-            console.log(stock)
             dispatch({type: 'CREATE_STOCKCHART', payload: stock.data});
         }catch(error){
         }
     }
 }
 
+export function createStockAnalysts(company){
+    return async (dispatch) => {
+        const stockanalysts_url = `${BASE_URL}/price-target`
+        try{
+            const stockanalysts = await axios(stockanalysts_url, {params:{
+                symbol: company,
+                token: API_KEY
+            }})
+            console.log(stockanalysts)
+            stockanalysts.data.ticker = company
+            dispatch({type: 'CREATE_STOCKANALYSTS', payload: stockanalysts.data})
+        }catch(error){
 
-export function chageResolution(resolution){
-    return{
-        type:'CHANGE_RESOLUTION', resolution:resolution
+        }
+    }
+
+}
+
+
+export function minuteStock(company){
+    return async (dispatch) =>{
+        const minuteStock_url = `${BASE_URL}/stock/candle`;
+        try{
+            const toDate = Math.floor(Date.now() / 1000)
+            const fromDate = toDate - 10*60
+            const stock = await axios(minuteStock_url, {params: {
+                symbol: company,
+                resolution: '1',
+                from : fromDate,
+                to: toDate,
+                token: API_KEY
+            }})
+            let stockdata = [];
+            stock.data.t.forEach((data, idx) => {
+                let a ={}
+                a["o"] = stock.data.o[idx];
+                a["h"] = stock.data.h[idx];
+                a["l"] = stock.data.l[idx];
+                a["c"] = stock.data.c[idx];
+                a["v"] = stock.data.v[idx];
+                a["t"] = data;
+                stockdata.push(a)
+            })
+            stockdata.ticker = company
+            console.log(stockdata)
+            dispatch({type: 'MINUTESTOCK', payload: stockdata});
+        }catch(error){
+        }
     }
 }
 
+export function dayStock(company){
+    return async (dispatch) =>{
+        const dayStock_url = `${BASE_URL}/stock/candle`;
+        try{
+            const toDate = Math.floor(Date.now() / 1000)
+            const fromDate = toDate - 5*24*60*60
+            const stock = await axios(dayStock_url, {params: {
+                symbol: company,
+                resolution: 'D',
+                from : fromDate,
+                to: toDate,
+                token: API_KEY
+            }})
+            let stockdata = [];
+            stock.data.t.forEach((data, idx) => {
+                let a ={}
+                a["o"] = stock.data.o[idx];
+                a["h"] = stock.data.h[idx];
+                a["l"] = stock.data.l[idx];
+                a["c"] = stock.data.c[idx];
+                a["v"] = stock.data.v[idx];
+                a["t"] = data;
+                stockdata.push(a)
+            })
+            console.log(stockdata)
+            stockdata.ticker = company
+            dispatch({type: 'DAYSTOCK', payload: stockdata});
+        }catch(error){
+        }
+    }
+}
+
+
+
+
+export function chageResolution(resolution){
+    return{
+        type:'CHANGE_RESOLUTION', 
+        resolution:resolution
+    }
+}
+
+export function createNewsInfo(company){
+    return async (dispatch) =>{
+        const newsinfo_url = `${BASE_URL}/company-news`;
+        try{
+            var today = new Date();
+            var toDate = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+(today.getDay()+10);
+            var weekAgo = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+(today.getDay()+3);
+            const newsinfo = await axios(newsinfo_url, {params: {
+                symbol: company,
+                from: weekAgo,
+                to : toDate,
+                token: API_KEY
+            }})
+            dispatch({type: 'CREATE_NEWSINFO', payload: newsinfo.data});
+        }catch(error){
+        }
+    }
+}

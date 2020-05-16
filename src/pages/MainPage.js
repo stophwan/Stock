@@ -6,6 +6,7 @@ import { createSymbol } from "../actions";
 import {  useSelector, useDispatch } from "react-redux";
 
 import TextSearch from "../components/TextSearch"
+import { Typography } from '@material-ui/core';
 // import NewSearch from "../components/NewSearch"
 // import RenewSearch from "../components/RenewSearch"
 
@@ -21,6 +22,9 @@ const MainPage = () => {
     })
     return (
       <Container maxWidth="md">
+        <Typography>
+          
+        </Typography>
             <TextSearch />
             <CompanyList/>
       </Container>

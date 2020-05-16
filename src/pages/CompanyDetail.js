@@ -5,13 +5,20 @@ import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Icons from '../components/Icons'
+import IconButton from '@material-ui/core/IconButton';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 import NewChart from '../components/NewChart';
 import StockInfo from '../components/StockInfo';
-import CompanyInfo from '../components/CompanyInfo';
+import DayStock from '../components/DayStock';
+import MinuteStock from '../components/MinuteStock';
+import StockAnalysts from '../components/StockAnalysts';
 import { createCompanyInfo } from "../actions";
+import { createNewsInfo } from "../actions";
 import { createStockChart } from "../actions";
+import Typography from '@material-ui/core/Typography'
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -82,22 +89,61 @@ const CompanyDetail = () => {
           {companyinfo && stockcandle &&
           <Container maxWidth="lg" className={classes.container}>
             <Grid container spacing={3}>
+              <Grid item xs={12} md={8} lg={9}>
+              <Typography
+              component="h2" variant="h3"  gutterBottom>
+                  {companyinfo.name}</Typography>
+              <Typography
+              component="h2" variant="h5"  gutterBottom>
+                  {companyinfo.symbol}</Typography>
+              </Grid>
+              <Grid item xs={12} md={4} lg={3}>
+                See more....
+                <IconButton aria-label="Home"
+                onClick = {() => {
+                  dispatch(createNewsInfo(ticker))
+                }}
+                component = {Link} 
+                to = {`/news/${ticker}`}
+                color="inherit">
+                    <AssignmentIcon/>
+                </IconButton>
+              </Grid>
               <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                <CompanyInfo companyinfo = {companyinfo}/>
-                </Paper>
+                  <StockInfo/>
               </Grid>
               <Grid item xs={12} md={8} lg={9}>
                 <Paper className={fixedHeightPaper}>
-                  <NewChart candle={stockcandle}/>
+                  <NewChart candle={stockcandle} ticker={ticker}/>
                   <Icons/>
                 </Paper>
               </Grid>
               <Grid item xs={12} md={4} lg={3}>
                 <Paper className={fixedHeightPaper}>
-                  <StockInfo/>
+                  <StockAnalysts/>
                 </Paper>
               </Grid>
+              <Grid item xs={12}>
+              <Typography
+              component="h2" variant="h6" color="primary" gutterBottom>
+                  시간별 시세</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Paper className={classes.paper}>
+                <MinuteStock/>
+                </Paper>
+              </Grid>
+              <Grid item xs={12}>
+              <Typography
+              component="h2" variant="h6" color="primary" gutterBottom>
+                  일별 시세</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Paper className={classes.paper}>
+                <DayStock/>
+                </Paper>
+              </Grid>
+
             </Grid>
           </Container>
         }
