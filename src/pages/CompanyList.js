@@ -15,87 +15,73 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import StorefrontIcon from '@material-ui/icons/Storefront';
 import {Link} from "react-router-dom";
 
 
-// const useStyles = makeStyles((theme) => ({
-//   root: {
-//     flexGrow: 1,
-//     width: '100%',
-//   },
-//   menuButton: {
-//     marginRight: theme.spacing(2),
-//   },
-//   title: {
-//     flexGrow: 1,
-//   },
-// }));
-
-const useStyles = makeStyles({
-  card: {
-    display: 'flex',
-  },
-});
-
-const use2Styles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    maxWidth: '36ch',
+    height: '100px',
     backgroundColor: theme.palette.background.paper,
+    paddingLeft: theme.spacing(3),
+    paddingRight: theme.spacing(3)
   },
-  inline: {
-    display: 'inline',
+  title:{
+
   },
+  logo:{
+    width: 75,
+    height: 75
+  }
 }));
 
 const CompanyProfile = ({company}) => {
     const classes = useStyles();
-    const classes2 = use2Styles();
     const { name,logo,c, ticker } = company;
     return(
-    //   <ListItem
-    //   button = {true} 
-    //   component = {Link}
-    //   to={`/company/${company.ticker}`}
-    //   >
-    //   <ListItemIcon>
-    //       <StorefrontIcon />
-    //   </ListItemIcon>
-    //   <ListItemText primary={name}/>
-    //   <ListItemText secondary={c}/>
-    // </ListItem>
-    <Grid item xs={12} md={6}>
+    //   <CardActionArea 
+    //   component={Link} 
+    //   to={`/company/${company.ticker}`}>
+    //   <Card className={classes.root} variant="outlined">
+    //     <CardContent>
+    //       <Typography className={classes.title} color="textSecondary" gutterBottom>
+    //         <img src={logo} alt={ticker}/>
+    //       </Typography>
+    //       <Typography variant="h5" component="h2">
+    //         {name}
+    //     </Typography>
+    //     <Typography variant="body2" component="p">
+    //       Current price: {c}
+    //     </Typography>
+    //     </CardContent>
+    //   </Card>
+    // </CardActionArea>
     <CardActionArea 
     component={Link} 
     to={`/company/${company.ticker}`}>
-      <Card className={classes.card}>
-      <List className={classes2.root}>
+      <Card>
+      <List className={classes.root}>
       <ListItem alignItems="flex-start">
         <ListItemAvatar>
-          <Avatar alt={ticker} src={logo} />
+          <Avatar alt={ticker} src={logo} className={classes.logo}/>
         </ListItemAvatar>
-        <ListItemText
-          primary={name}
-          secondary={
-            <React.Fragment>
-              <Typography
-                component="span"
-                variant="body2"
-                className={classes2.inline}
-                color="textPrimary"
-              >
-                Now: {c}
-              </Typography>
-            </React.Fragment>
-          }
-        />
+        <ListItemText>
+          <Typography
+          component="h4"
+          variant="h4">
+            {name}
+          </Typography>
+          <Typography
+          component="span"
+          variant="body2"
+          >
+            Now: {c}
+          </Typography>
+        </ListItemText>
         </ListItem>
         </List>
       </Card>
     </CardActionArea>
-  </Grid>
   )
 }
 

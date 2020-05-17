@@ -23,7 +23,7 @@ export default function BasicTextFields() {
   return (
     <form className={classes.root} noValidate autoComplete="off">
       <TextField id="outlined-basic" label="Search Symbol" variant="outlined"
-        color = "secondary"
+        color = "primary"
         value = {name}
         onChange={(event)=>{
             setName(event.target.value);
@@ -31,7 +31,7 @@ export default function BasicTextFields() {
         onKeyDown={(event)=>{
             if(event.keyCode === 13){
                 if(!loading){
-                    dispatch(createMainInfo(name))
+                    dispatch(createMainInfo(name.toUpperCase()))
                     setName("");
                 }
             event.preventDefault();

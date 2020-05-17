@@ -55,7 +55,7 @@ export default function DayStock() {
         <TableBody>
           {daystock.map((stock) => (
             <TableRow key={stock.t}>
-              <TableCell>{timetoDate(stock.t)}</TableCell>
+              <TableCell>{timetoDate(stock.t*1000)}</TableCell>
               <TableCell>{stock.o}</TableCell>
               <TableCell>{stock.c}</TableCell>
               <TableCell>{stock.h}</TableCell>

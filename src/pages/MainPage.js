@@ -1,15 +1,21 @@
 import React,{useEffect} from 'react';
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
+import SearchError from '../components/SearchError'
 import CompanyList from "./CompanyList"
 import { createSymbol } from "../actions";
 import {  useSelector, useDispatch } from "react-redux";
-
+import Box from '@material-ui/core/Box';
 import TextSearch from "../components/TextSearch"
 import { Typography } from '@material-ui/core';
-// import NewSearch from "../components/NewSearch"
-// import RenewSearch from "../components/RenewSearch"
+import ShowChartIcon from '@material-ui/icons/ShowChart';
 
+
+
+// const theme = createMuiTheme({
+//   typography: {
+//     color: '#00bfa5'
+//   },
+// });
 
 const MainPage = () => {
     
@@ -22,11 +28,18 @@ const MainPage = () => {
     })
     return (
       <Container maxWidth="md">
+        <div style={{color : '#00bfa5'}}>
         <Typography>
-          
+          <ShowChartIcon/>
+          <Box fontWeight="fontWeightBold" m={1} fontSize={64}>
+          <ShowChartIcon/>
+            SSNIPER
+          </Box>
         </Typography>
-            <TextSearch />
-            <CompanyList/>
+        </div>
+          <TextSearch />
+          <SearchError/>
+          <CompanyList/>
       </Container>
 
     );

@@ -1,6 +1,8 @@
 import produce from 'immer'
 
 const baseState = {
+    loading: false,
+    error: false,
     companies: null,
     maininfo : [],
     companyinfo: null,
@@ -44,6 +46,15 @@ const reducer = produce((state, action)=>{
             break;
         case "CREATE_NEWSINFO":
             state.newsinfo = action.payload
+            break;
+        case 'ERROR':
+            state.error = action.payload;
+            break;
+        case 'START_LOADING':
+            state.loading = true;
+            break;
+        case 'END_LOADING':
+            state.loading = false;
             break;
         default:
             break;
