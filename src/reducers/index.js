@@ -2,7 +2,7 @@ import produce from 'immer'
 
 const baseState = {
     loading: false,
-    error: false,
+    error: null,
     companies: null,
     maininfo : [],
     companyinfo: null,
@@ -12,7 +12,6 @@ const baseState = {
     minutestock: null,
     daystock: null,
     newsinfo: null,
-    resolution: 'D'
 }
 
 const reducer = produce((state, action)=>{
@@ -29,9 +28,6 @@ const reducer = produce((state, action)=>{
         case "CREATE_STOCKINFO":
             state.stockinfo = action.payload;
             break
-        case "CHANGE_RESOLUTION":
-            state.resolution = action.resolution;
-            break;
         case "CREATE_STOCKCHART":
             state.stockcandle = action.payload;
             break;

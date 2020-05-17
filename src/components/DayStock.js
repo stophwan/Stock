@@ -38,6 +38,8 @@ export default function DayStock() {
     }
   })
 
+  console.log(daystock)
+
   return (
     daystock&&
     <React.Fragment>

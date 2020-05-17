@@ -30,7 +30,6 @@ const MainPage = () => {
       <Container maxWidth="md">
         <div style={{color : '#00bfa5'}}>
         <Typography>
-          <ShowChartIcon/>
           <Box fontWeight="fontWeightBold" m={1} fontSize={64}>
           <ShowChartIcon/>
             SSNIPER

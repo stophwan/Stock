@@ -8,8 +8,10 @@ export default class ApexChart extends React.Component {
       if(this.props.candle){
         data = this.datamining(this.props.candle)
       }
+      console.log(this.props.candle.resolution)
       this.state = {
         ticker: this.props.candle.ticker,
+        resolution: this.props.candle.resolution,
         series: data,
 
         options: {
@@ -61,14 +63,16 @@ export default class ApexChart extends React.Component {
     }
 
 
+
     shouldComponentUpdate(nextProps, nextState){
-      if(nextProps.candle.ticker !== this.state.ticker ){
+      if(nextProps.candle.ticker !== this.state.ticker || nextProps.candle.resolution !== this.state.resolution ){
         console.log(nextProps.candle.ticker)
         console.log(this.state.ticker)
 
         let data = this.datamining(nextProps.candle)
         this.setState({
           ticker:nextProps.candle.ticker,
+          resolution:nextProps.candle.resolution,
           series:data
         })
         return true;

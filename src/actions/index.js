@@ -118,7 +118,9 @@ export function createStockChart(company, resolution='D'){
                 token: API_KEY
             }})
             stock.data.ticker = company
-            
+            stock.data.resolution = resolution
+            console.log(stock.data.resolution)
+            console.log(stock.data)
             dispatch({type: 'CREATE_STOCKCHART', payload: stock.data});
         }catch(error){
         }
@@ -170,7 +172,7 @@ export function minuteStock(company){
             })
             stockdata.ticker = company
             console.log(stockdata)
-            dispatch({type: 'MINUTESTOCK', payload: stockdata});
+            dispatch({type: 'MINUTESTOCK', payload: stockdata.reverse()});
         }catch(error){
         }
     }
@@ -202,21 +204,12 @@ export function dayStock(company){
             })
             console.log(stockdata)
             stockdata.ticker = company
-            dispatch({type: 'DAYSTOCK', payload: stockdata});
+            dispatch({type: 'DAYSTOCK', payload: stockdata.reverse()});
         }catch(error){
         }
     }
 }
 
-
-
-
-export function chageResolution(resolution){
-    return{
-        type:'CHANGE_RESOLUTION', 
-        resolution:resolution
-    }
-}
 
 export function createNewsInfo(company){
     return async (dispatch) =>{

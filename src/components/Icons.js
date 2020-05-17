@@ -6,19 +6,17 @@ import Grid from '@material-ui/core/Grid';
 import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import { useSelector, useDispatch } from "react-redux";
-import { chageResolution } from "../actions";
 import { useParams } from 'react-router-dom';
+import {createStockChart} from '../actions'
 
 export default function ToggleButtonSizes() {
   const [alignment, setAlignment] = React.useState('D');
-
-  const resolution =  useSelector(state => state.resolution);
   const dispatch = useDispatch();
   const {ticker} = useParams();
 
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);
-    dispatch((chageResolution(alignment)))
+    dispatch( createStockChart(ticker, newAlignment))
 
   };
 
