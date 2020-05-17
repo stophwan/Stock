@@ -3,12 +3,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import {  useSelector, useDispatch } from "react-redux";
 import { createMainInfo } from "../actions";
+import DonutLargeIcon from '@material-ui/icons/DonutLarge';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
-      marginTop: '100px',
+      marginTop: '20px',
+      marginBottom: '30px',
       width: '100ch',
     },
   },
@@ -37,9 +39,10 @@ export default function BasicTextFields() {
             event.preventDefault();
             return false;
             }
-        }}
-      
-      />
+        }}>
+          {loading && (<DonutLargeIcon spin />)}
+          {!loading && "추가"}
+        </TextField>
     </form>
   );
 }

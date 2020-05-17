@@ -25,20 +25,6 @@ const useStyles = makeStyles((theme) => ({
       display: 'block',
     },
   },
-
-  inputRoot: {
-    color: 'inherit',
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
   sectionDesktop: {
     display: 'none',
     [theme.breakpoints.up('md')]: {
@@ -61,12 +47,10 @@ export default function PrimarySearchAppBar() {
 
   return (
     <div className={classes.grow}>
-      {/* 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)' */}
-
       <AppBar position="static" style={{background: '#00bfa5'}}>
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            MJ_STOCK
+            STOCK_SNIPER
           </Typography>
 
           <div className={classes.grow} />

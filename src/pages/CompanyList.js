@@ -3,13 +3,8 @@ import _ from "lodash"
 import { useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import PropTypes from 'prop-types';
-import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Hidden from '@material-ui/core/Hidden';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -21,7 +16,7 @@ import {Link} from "react-router-dom";
 const useStyles = makeStyles((theme) => ({
   root: {
     width: '100%',
-    height: '100px',
+    height: '80px',
     backgroundColor: theme.palette.background.paper,
     paddingLeft: theme.spacing(3),
     paddingRight: theme.spacing(3)
@@ -29,39 +24,29 @@ const useStyles = makeStyles((theme) => ({
   title:{
 
   },
+  card: {
+    margin:'3px',
+    boxShadow: '#00bfa5'
+  },
   logo:{
     width: 75,
-    height: 75
+    height: 75,
+    marginRight: '5px',
+    alignItems: 'flex-start'
   }
 }));
 
+// '#00bfa5'
 const CompanyProfile = ({company}) => {
     const classes = useStyles();
     const { name,logo,c, ticker } = company;
     return(
-    //   <CardActionArea 
-    //   component={Link} 
-    //   to={`/company/${company.ticker}`}>
-    //   <Card className={classes.root} variant="outlined">
-    //     <CardContent>
-    //       <Typography className={classes.title} color="textSecondary" gutterBottom>
-    //         <img src={logo} alt={ticker}/>
-    //       </Typography>
-    //       <Typography variant="h5" component="h2">
-    //         {name}
-    //     </Typography>
-    //     <Typography variant="body2" component="p">
-    //       Current price: {c}
-    //     </Typography>
-    //     </CardContent>
-    //   </Card>
-    // </CardActionArea>
     <CardActionArea 
     component={Link} 
     to={`/company/${company.ticker}`}>
-      <Card>
+      <Card variant="outlined" className={classes.card} style={{borderColor: '#00bfa5'}}> 
       <List className={classes.root}>
-      <ListItem alignItems="flex-start">
+      <ListItem>
         <ListItemAvatar>
           <Avatar alt={ticker} src={logo} className={classes.logo}/>
         </ListItemAvatar>
@@ -71,9 +56,11 @@ const CompanyProfile = ({company}) => {
           variant="h4">
             {name}
           </Typography>
+        </ListItemText>
+        <ListItemText>
           <Typography
-          component="span"
-          variant="body2"
+          component="h5"
+          variant="h5"
           >
             Now: {c}
           </Typography>

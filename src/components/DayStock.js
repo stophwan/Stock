@@ -13,7 +13,7 @@ function timetoDate(timestamp){
   var date = new Date(timestamp)
   var year = date.getFullYear();
   var month = date.getMonth()+1;
-  var day = date.getDay();
+  var day = date.getDate();
   var daydate = year+'-'+month+'-'+day
   return daydate
 }
@@ -25,7 +25,6 @@ export default function DayStock() {
 
   
   useEffect(()=>{
-    console.log(daystock)
     if(daystock){
       if(ticker !== daystock.ticker){
         dispatch((dayStock(ticker)))
@@ -38,7 +37,6 @@ export default function DayStock() {
     }
   })
 
-  console.log(daystock)
 
   return (
     daystock&&

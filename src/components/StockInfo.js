@@ -53,8 +53,6 @@ function contarst_color(c,contrast_num, contrast_per){
 export default function StockInfo() {
   const classes = useStyles();
   const stockinfo = useSelector(state => state.stockinfo)
-  // let timestamp = stockinfo.t
-  // let date = new Date(timestamp)
   const {ticker} = useParams();
   const dispatch = useDispatch();
   
@@ -88,7 +86,7 @@ export default function StockInfo() {
             <TableCell>Low Price  :  {stockinfo.l} </TableCell>
         </TableRow>
         <TableRow>
-            <TableCell colSpan={2}>Previous  :  {stockinfo.pc} </TableCell>
+            <TableCell colSpan={2}>Previous close :  {stockinfo.pc} </TableCell>
             <TableCell></TableCell>
         </TableRow>
       </Table>

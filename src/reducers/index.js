@@ -9,6 +9,7 @@ const baseState = {
     stockinfo: null,
     stockcandle: null,
     stockanalysts: null,
+    stockestimate: null,
     minutestock: null,
     daystock: null,
     newsinfo: null,
@@ -34,9 +35,9 @@ const reducer = produce((state, action)=>{
         case "CREATE_STOCKANALYSTS":
             state.stockanalysts = action.payload
             break;
-        case "MINUTESTOCK":
-            state.minutestock = action.payload
-            break;
+        case "CREATE_STOCKESTIMATE":
+            state.stockestimate = action.payload
+            break
         case "DAYSTOCK":
             state.daystock = action.payload
             break;

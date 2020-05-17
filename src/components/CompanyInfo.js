@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CompanyInfo({companyinfo}) {
 
-  console.log(companyinfo)
 
   const name =  companyinfo.name
 

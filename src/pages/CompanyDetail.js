@@ -10,10 +10,9 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import NewChart from '../components/NewChart';
 import StockInfo from '../components/StockInfo';
 import DayStock from '../components/DayStock';
-import MinuteStock from '../components/MinuteStock';
 import StockAnalysts from '../components/StockAnalysts';
+import StockEstimate from '../components/stockEstimate';
 import { createCompanyInfo } from "../actions";
-import { createNewsInfo } from "../actions";
 import { createStockChart } from "../actions";
 import Typography from '@material-ui/core/Typography'
 import { useSelector, useDispatch } from "react-redux";
@@ -98,15 +97,14 @@ const CompanyDetail = () => {
                   {companyinfo.symbol}</Typography>
               </Grid>
               <Grid item xs={12} md={4} lg={3}>
-                See more....
+                See News....
                 <IconButton aria-label="Home"
-                onClick = {() => {
-                  dispatch(createNewsInfo(ticker))
-                }}
+                onClick = {() => {}}
                 component = {Link} 
                 to = {`/news/${ticker}`}
                 color="inherit">
-                    <AssignmentIcon/>
+                    <AssignmentIcon
+                    style={{ fontSize: 40 }}/>
                 </IconButton>
               </Grid>
               <Grid item xs={12}>
@@ -126,21 +124,21 @@ const CompanyDetail = () => {
               <Grid item xs={12}>
               <Typography
               component="h2" variant="h6" color="primary" gutterBottom>
-                  시간별 시세</Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                <MinuteStock/>
-                </Paper>
-              </Grid>
-              <Grid item xs={12}>
-              <Typography
-              component="h2" variant="h6" color="primary" gutterBottom>
                   일별 시세</Typography>
               </Grid>
               <Grid item xs={12}>
                 <Paper className={classes.paper}>
                 <DayStock/>
+                </Paper>
+              </Grid>
+              <Grid item xs={12}>
+              <Typography
+              component="h2" variant="h6" color="primary" gutterBottom>
+                  ESP 추정</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Paper className={classes.paper}>
+                <StockEstimate/>
                 </Paper>
               </Grid>
 

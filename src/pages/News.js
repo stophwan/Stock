@@ -1,24 +1,25 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
 import NewsInfo from "../components/NewsInfo"
-
+import Box from '@material-ui/core/Box';
 import { Typography } from '@material-ui/core';
 
 
 
 const NewsPage = () => {
-    
+
     return (
       <Container maxWidth="md">
-        <Typography component='h2'>
-          Weekly News
-        </Typography>
+        <div style={{color : '#00bfa5', marginTop: '50px'}}>
+          <Typography>
+            <Box fontWeight="fontWeightBold" m={1} fontSize={64}>
+              Weekly News
+            </Box>
+          </Typography>
+        </div>
         <NewsInfo/>
       </Container>
-
     );
-
 }
 
 

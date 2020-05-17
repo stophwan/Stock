@@ -81,7 +81,6 @@ export default class ApexChart extends React.Component {
   }
 
     render() {
-        console.log(this.state.series)
         return (
             (this.state.series &&
             <div id="chart">

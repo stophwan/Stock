@@ -1,19 +1,3 @@
-// import React from 'react';
-// import { useSelector } from 'react-redux';
-
-// export default function ErrorMsg() {
-//   const error = useSelector(state => state.error);
-
-//   if (!error) {
-//     return <div/>;
-//   }
-//   return (
-//     <Alert variant='danger'>
-//       Error: {error.message}
-//     </Alert>
-//   );
-// }
-
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
